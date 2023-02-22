@@ -11,4 +11,21 @@ public class Invoice {
         this.customer = customer;
         this.performances = performances;
     }
+
+    int calculateTotalAmount() {
+        int totalAmount = 0;
+        for (var performance : performances) {
+            totalAmount += performance.calculateThisAmount();
+
+        }
+        return totalAmount;
+    }
+
+    int calculateVolumeCredits() {
+        int volumeCredits = 0;
+        for (var performance : performances) {
+            volumeCredits += performance.calculateThisCredits();
+        }
+        return volumeCredits;
+    }
 }

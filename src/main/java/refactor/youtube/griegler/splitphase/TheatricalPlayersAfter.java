@@ -3,32 +3,66 @@ package refactor.youtube.griegler.splitphase;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+/*
+ 1. moved format down where it's used
+ 2. extract thisAmount calculation to method
+ 3. rename perf to performance -> do not abbreviate
+ 4. move up thisAmount increment and inline
+ 5. extract method calculating totalAmount
+ 6. inline play
+ 7. split the loop
+ 8. extract totalAmount calculation
+ 9. extract thisCredits calculation
+10. extract volumeCredits calculation
+11. !!! move calculations into invoice obj !!!
+12. !!! move calculations into performance obj !!!
+13. inline
+14. extract and rename to printPlainText
+*/
+
 public class TheatricalPlayersAfter {
 
     public String print(Invoice invoice) {
-        int totalAmount = 0;
-        int volumeCredits = 0;
-        String result = String.format("Statement for %s\n", invoice.customer);
+        InvoiceData invoiceData = new InvoiceData(
+            invoice.customer,
+            invoice.calculateTotalAmount(),
+            invoice.calculateVolumeCredits());
 
+        return printPlainText(invoiceData);
+    }
+
+    private String printPlainText(
+        InvoiceData invoiceData) {
         NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
-
-        for (var perf : invoice.performances) {
-            var play = perf.play;
-            var thisAmount = 40000;
-            if (perf.audience > 30) {
-                thisAmount += 1000 * (perf.audience - 30);
-            }
-
-            var thisCredits = Math.max(perf.audience - 30, 0);
-            if ("comedy".equals(play.type)) thisCredits += Math.floor((double) perf.audience / 5);
-
-            totalAmount += thisAmount;
-            volumeCredits += thisCredits;
-        }
-
-        result += String.format("Amount owed is %s%n", format.format(totalAmount / 100));
-        result += String.format("You earned %s credits%n", volumeCredits);
+        String result = String.format("Statement for %s%n", invoiceData.getCustomer());
+        result += String.format("Amount owed is %s%n", format.format(invoiceData.getTotalAmount() / 100));
+        result += String.format("You earned %s credits%n", invoiceData.getVolumeCredits());
         return result;
     }
 
+
+    private static class InvoiceData {
+
+        private final String customer;
+        private final int totalAmount;
+        private final int volumeCredits;
+
+        private InvoiceData(String customer, int totalAmount, int volumeCredits) {
+            this.customer = customer;
+            this.totalAmount = totalAmount;
+            this.volumeCredits = volumeCredits;
+        }
+
+        public String getCustomer() {
+            return customer;
+        }
+
+        public int getTotalAmount() {
+            return totalAmount;
+        }
+
+        public int getVolumeCredits() {
+            return volumeCredits;
+        }
+    }
 }
