@@ -3,3 +3,4 @@ password
 password
 
 squash01
+squash02
