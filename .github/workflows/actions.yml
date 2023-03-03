@@ -6,11 +6,14 @@ jobs:
   run-action-job:
     runs-on: ubuntu-latest
     steps:
+      - name: list-envs
+        run: declare -p
+
       - name: list-files-BEFORE-checkout
         run: |
           pwd
           ls -altr
-          git status 2>/dev/null || echo "not a git repo"
+          git status 2>/dev/null || echo "Not a git repo!"
 
       - name: checkout
         uses: actions/checkout@v1   # checkouts the code from the commit that triggered this action
