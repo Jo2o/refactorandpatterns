@@ -10,7 +10,7 @@ jobs:
         run: |
           pwd
           ls -altr
-          git status
+          git status 2>/dev/null || echo "not a git repo"
 
       - name: checkout
         uses: actions/checkout@v1   # checkouts the code from the commit that triggered this action
