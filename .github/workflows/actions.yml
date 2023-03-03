@@ -1,6 +1,14 @@
 name: Actions Workflow
 
-on: push
+on: 
+  #push:
+  pull_request:
+    types: [assigned, closed, opened, reopened]
+  repository_dispatch:
+    types: [build]   # w/o build it would run on any type
+  schedule:
+    - cron: "0 12 * FEB 2"
+    - cron: "0 12 * JAN 2"
 
 jobs:
   run-action-job:
