@@ -22,6 +22,7 @@ jobs:
 
   run-windows:
     runs-on: windows-latest
+    needs: [run-ubuntu]     # w/o this thay would run in parallel
     steps:
       - name: Win-Powershell
         run: Get-Location
@@ -29,4 +30,4 @@ jobs:
       - name: Win-Bash
         run: pwd
         shell: bash
-        
+
