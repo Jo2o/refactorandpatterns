@@ -40,3 +40,6 @@ jobs:
       
       - name: log-greeting-time
         run: echo "${{ steps.greet.outputs.time }}"
+
+      - name: log-request-payload
+        run: echo "Env from request's body: ${{ github.event.client_payload.env }}"
