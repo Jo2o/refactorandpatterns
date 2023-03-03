@@ -6,6 +6,11 @@ jobs:
   run-action-job:
     runs-on: ubuntu-latest
     steps:
+      - name: list-files
+        run: |
+          pwd
+          ls
+
       - name: hello-from-js
         id: greet
         uses: actions/hello-world-javascript-action@v1.1  # this is puslished action on GitHub, can use master (branch name) or SHA of the specific commit, SHA is safest way!
