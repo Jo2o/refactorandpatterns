@@ -10,6 +10,8 @@ jobs:
         run: |
           pwd
           ls -altr
+          git status
+
       - name: checkout
         uses: actions/checkout@v1   # checkouts the code from the commit that triggered this action
 
@@ -17,6 +19,7 @@ jobs:
         run: |
           pwd
           ls -altr
+          git status
 
       - name: hello-from-js
         id: greet
