@@ -3,7 +3,7 @@ name: Shell Commands
 on: [push]
 
 jobs:
-  run-shell-command:
+  run-ubuntu:
     runs-on: ubuntu-latest
     steps:
       - name: RunEcho
@@ -19,4 +19,14 @@ jobs:
         run: |
           import platform
           print('Platform processor is: ' + platform.processor())
-          
+
+  run-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Win-Powershell
+        run: Get-Location
+
+      - name: Win-Bash
+        run: pwd
+        shell: bash
+        
