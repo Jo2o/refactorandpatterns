@@ -7,6 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: hello-from-js
-        uses: actions/hello-world-javascript-action@v1  # this is puslished action on GitHub, can use master (branch name) or SHA of the specific commit, SHA is safest way!
+        uses: actions/hello-world-javascript-action@master  # this is puslished action on GitHub, can use master (branch name) or SHA of the specific commit, SHA is safest way!
         with:
           who-to-greet: Jo2o
