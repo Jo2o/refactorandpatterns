@@ -7,6 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: hello-from-js
-        uses: actions/hello-world-javascript-action@master  # this is puslished action on GitHub, can use master (branch name) or SHA of the specific commit, SHA is safest way!
+        id: greet
+        uses: actions/hello-world-javascript-action@v1.1  # this is puslished action on GitHub, can use master (branch name) or SHA of the specific commit, SHA is safest way!
         with:
           who-to-greet: Jo2o
+      
+      - name: log-greeting-time
+        run: echo "${{ steps.greet.outputs.time }}"
