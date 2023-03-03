@@ -6,10 +6,17 @@ jobs:
   run-action-job:
     runs-on: ubuntu-latest
     steps:
-      - name: list-files
+      - name: list-files-BEFORE-checkout
         run: |
           pwd
-          ls
+          ls -altr
+      - name: checkout
+        uses: actions/checkout@v1   # checkouts the code from the commit that triggered this action
+
+      - name: list-files-AFTER-checkout
+        run: |
+          pwd
+          ls -altr
 
       - name: hello-from-js
         id: greet
