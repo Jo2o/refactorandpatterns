@@ -8,7 +8,15 @@ jobs:
     steps:
       - name: RunEcho
         run: echo "Running echo..."
+
       - name: CheckVersions
         run: |
           node -v
           npm -v
+
+      - name: SomePython
+        shell: python
+        run: |
+          import platform
+          print('Platform processor is: ' + platform.processor())
+          
